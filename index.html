@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Weather Project</title>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script>if(!window.jQuery){document.write('<script src="vendor/jquery-2.1.4.min.js"><\/script>');}</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+	<script>if(!window.TweenMax){document.write('<script src="vendor/TweenMax-1.18.0.min.js"><\/script>');}</script>
+	<script type="text/javascript" src="main.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+		
+	<div id='outer'>		
+		<div id='container'>
+			<svg id='weather-shard-1' x="0px" y="0px" width="85.25px" height="112.25px" viewBox="0 0 85.25 112.25" enable-background="new 0 0 85.25 112.25" xml:space="preserve">
+				<polygon class='shard-1' fill="#FBA919" points="82.999,81.532 31.844,65.788 11.905,25.437 63.062,41.181 "/>
+				<polygon class='shard-2' fill="#82B69D" points="1.501,81.645 34.133,39.221 78.908,34.645 46.275,77.07 "/>
+				<polygon class='shard-3' fill="#EDEDEE" points="44.04,109.91 30.401,68.473 45.866,34.645 59.506,76.085 "/>
+				<polygon class='shard-4' fill="#00AEEF" points="46.049,81.532 28.645,41.875 46.049,2.219 63.452,41.875 "/>
+			</svg>
+
+			<svg id='weather-shard-3' x="0px" y="0px" width="85.25px" height="112.25px" viewBox="0 0 85.25 112.25" enable-background="new 0 0 85.25 112.25" xml:space="preserve">
+				<polygon id='shard-1' fill="#171717" points="82.999,81.532 31.844,65.788 11.905,25.437 63.062,41.181 "/>
+				<polygon id='shard-2' fill="#AFAFAF" points="1.501,81.645 34.133,39.221 78.908,34.645 46.275,77.07 "/>
+				<polygon id='shard-3' fill="#DCDCDC" points="44.04,109.91 30.401,68.473 45.866,34.645 59.506,76.085 "/>
+				<polygon id='shard-4' fill="#808080" points="46.049,81.532 28.645,41.875 46.049,2.219 63.452,41.875 "/>
+			</svg>
+
+			<div id='content'>
+				<div class='image-container'>
+					<img src="img/weather-scene.png" id='scene'>
+				</div>
+				<p class='welcome'>Welcome to the weather project</p>
+				<p id='begin'>begin</p>
+				<div id='story'>
+					<div id='section-1'>
+						<p>This is the village of Lienosus.</p>
+					</div>
+					<div id='section-2'>
+						<p>The people of the village used to moan about the weather all day long...</p>
+						<p>...sunshine or rain, they loved complaining.</p>
+					</div>
+					<div id='section-3'>	
+						<p>But then one day, the weather just disappeared....</p>
+					</div>
+					<div id='section-4'>
+						<p>...No rain, no sun, clouds or snow.</p>
+						<p>The colours started to fade, and the people of the village despaired...</p>	
+					</div>
+					<div id='section-5'>
+						<p>Will you bring back the weather and save the people from their fate?</p>	
+					</div>
+				</div>
+				<p id='next-1' class='next'>next</p>
+
+				<div id='instructions'>
+					<svg id='weather-shard-2' x="0px" y="0px" width="85.25px" height="112.25px" viewBox="0 0 85.25 112.25" enable-background="new 0 0 85.25 112.25" xml:space="preserve">
+						<polygon class='shard-1' fill="#171717" points="82.999,81.532 31.844,65.788 11.905,25.437 63.062,41.181 "/>
+						<polygon class='shard-2' fill="#AFAFAF" points="1.501,81.645 34.133,39.221 78.908,34.645 46.275,77.07 "/>
+						<polygon class='shard-3' fill="#DCDCDC" points="44.04,109.91 30.401,68.473 45.866,34.645 59.506,76.085 "/>
+						<polygon class='shard-4' fill="#808080" points="46.049,81.532 28.645,41.875 46.049,2.219 63.452,41.875 "/>
+					</svg>
+					<div id='section-1'>
+						<p>This is a weather shard...</p>
+					</div>
+					<div id='section-2'>
+						<p>...A fragment sent from the heavens with the power to control the weather.</p>
+					</div>
+					<div id='section-3'>
+						<p>However, it needs to borrow power from somewhere in your world...</p>
+					</div>
+				</div>
+				<p id='next-2' class='next'>next</p>
+				
+				<div id='choose-city'>
+					<form id='city-form'>
+						Connect the shard with a town or city from your world<br>
+						<input type="text" autocomplete='off' name='city' id='city'>
+						<input type="submit" value='Find Weather' id='find-weather'>
+					</form>
+					<p id='result'></p>
+					<p id='connect'>Connect the shard?</p>
+				</div>
+
+				<div id='gather-energy'>
+					<p id='energy'>The air now hums with energy from your world, collect it to ignite the weather shard</p>
+				</div>
+
+				<div id='success'>
+					<p id='success-message'></p>
+					<p id='complaining'></p>
+					<p id='whoops'>Whoops...</p>
+					<p id='maybe'>Maybe they won't complain next time......</p>
+				</div>
+			
+			</div>
+		</div>
+	</div>		
+</body>
+</html>
