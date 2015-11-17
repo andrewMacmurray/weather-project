@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	
 	// set vertical height
-	var height = window.innerHeight;
-	var width = window.innerWidth;
+	var height = $(window).height();
+	var width = $(window).width();
 	
 	// settings
 	var set = {
@@ -12,6 +12,8 @@ $(document).ready(function() {
 		sphereCounter: 1,
 		spawnMargin: 100,
 		shardOrigin: 0.15,
+		
+		// colours
 		shardColors: {
 			sunshine: {
 				shard1:'#F34436',
@@ -35,20 +37,42 @@ $(document).ready(function() {
 				shard4:'#88A9E2',
 				bg:'#9AA4B3'
 			}
+		},
+		
+		// messages
+		result: {
+			sunshine: 'Skies are clear and the sun is shining in ',
+			rain: 'Rain is falling in ',
+			clouds: 'Clouds cover the sky in ',
+			wind: 'The wind is blowing in ',
+			errorMessage: 'The shard is struggling to connect, maybe try another city...'
+		},
+		success: {
+			message: 'Hooray, the weather has returned, ',
+			sunshine: 'the sun shines on Lineousus!',
+			rain: 'the rain falls on Lineousus!',
+			clouds: 'clouds cover the sky in Lineousus',
+			wind: 'wind blows through the trees in Lineousus!',
+			complaining: 'But then the people started complaining.....and the ', // + weatherClass +
+			gone: ' went away.'
+		},
+		// changes result message second time round
+		secondLoop: {
+			message1: 'Again?!!',
+			message2: 'Oh well, you could give them one more chance if you\'re feeling benevolent...'  
 		}
 	}
 	
 	if (width < 981) {
 		set.sphereNumber = 10;
 		set.spawnMargin = 100;
-		console.log(set.sphereNumber);
 	}
 
 	
 	// responsive design features -- scales heights and margins
 	$(window).on('load resize', function() {
-		var height = window.innerHeight;
-		var width = window.innerWidth;
+		var height = $(window).height();
+		var width = $(window).width();
 		if (width > 980 && height > 650) {
 			$('#scene').css('margin-top', height/4-90);
 		} else {
@@ -150,30 +174,28 @@ $(document).ready(function() {
 					data: 'q=' + city + '&APPID=bf70ec09855f00481d68c070f24d634a',
 					dataType: 'json',
 					success: function(json) {
-						console.log('weather in ' + city + ' loaded');
 						var weather = json.weather[0].main;
 						var rain = json.weather[0].description;
 						var windSpeed = json.wind.speed;
 						var city = json.name;
-						console.log(weather);
-						console.log(json);
 						
 						set.weatherClass = $('#result').attr('class');
 						$('#result').removeClass(set.weatherClass);
 						// output messages depending on location
 						if (weather === 'Clouds') {
-							$('#result').text('Clouds cover the sky in ' + city).addClass('clouds');
+							$('#result').text(set.result.clouds + city).addClass('clouds');
 						}
 						if (weather === 'Clear') {
-							$('#result').text('Skies are clear and the sun is shining in ' + city).addClass('sunshine');
+							$('#result').text(set.result.sunshine + city).addClass('sunshine');
 						}
 						if (rain === 'moderate rain' && weather === 'Rain') {
-							$('#result').text('Rain is falling in ' + city).addClass('rain');
+							$('#result').text(set.result.rain + city).addClass('rain');
 						} else if (weather === 'Rain') {
+							// different message for light rain or heavy rain
 							$('#result').text('A ' + rain + ' is falling in ' + city).addClass('rain');
 						}
 						if (windSpeed >= 11) {
-							$('#result').text('The wind is blowing in ' + city).addClass('wind');
+							$('#result').text(set.result.wind + city).addClass('wind');
 						}
 
 						TweenMax.to($('#result'), 1, {opacity:1, display:'block'});
@@ -181,8 +203,8 @@ $(document).ready(function() {
 						
 					},
 					error: function() {
-						console.log('weather did not load');
-						$('#result').text('The shard is struggling to connect, maybe try another city.');
+						$('#result').text(set.result.errorMessage);
+						TweenMax.to($('#result'), 1, {opacity:1, display:'block'});
 					}
 				});
 			}
@@ -199,16 +221,16 @@ $(document).ready(function() {
 		
 		// sets messages based on the weather
 		if (set.weatherClass === 'rain') {
-			$('#success-message').text('Hooray! The weather has returned, rain falls on Lineousus!');
+			$('#success-message').text(set.success.message + set.success.rain);
 		} else if (set.weatherClass === 'sunshine') {
-			$('#success-message').text('Hooray! The weather has returned, sun shines on Lineousus!');
+			$('#success-message').text(set.success.message + set.success.sunshine);
 		} else if (set.weatherClass === 'clouds') {
-			$('#success-message').text('Hooray! The weather has returned, clouds cover the sky in Lineousus!');
+			$('#success-message').text(set.success.message + set.success.clouds);
 		} else {
-			$('#success-message').text('Hooray! The weather has returned, wind blows through the trees in Lineousus!');
+			$('#success-message').text(set.success.message + set.success.wind);
 		}
 			
-		$('#complaining').text('But then the people started complaining.....and the ' + set.weatherClass + ' went away.');
+		$('#complaining').text(set.success.complaining + set.weatherClass + set.success.gone);
 
 
 		// hide last seciton
@@ -231,8 +253,8 @@ $(document).ready(function() {
 	$('.energy-container').on('click', function() {
 		// snap spheres to origin point
 		var sphere = $(this);
-		sphere.css({'top': height*set.shardOrigin, 'left': '48%'});
-		TweenMax.to(sphere, 0.3, {opacity: 0, display: 'none', delay: 0.5});
+		TweenMax.set(sphere, {'top': height*set.shardOrigin, 'left': '48%'});
+		TweenMax.to(sphere, 0.2, {opacity: 0, display: 'none', delay: 0.2});
 
 		// defines animations for each power level of shard (1-8)
 		shardPower(set.weatherClass, set.shardColors, set.sphereCounter);
@@ -288,8 +310,8 @@ $(document).ready(function() {
 					for (var i=0; i<4; i++) {
 						TweenMax.set($('#weather-shard-3 #shard-' + (i+1)), {clearProps: 'fill'});
 					}
-					$('#whoops').text('Again?!!');
-					$('#maybe').text('Oh well, you could give them one more chance if you\'re feeling benevolent...');
+					$('#whoops').text(set.secondLoop.message1);
+					$('#maybe').text(set.secondLoop.message2);
 				}
 
 			}
@@ -346,8 +368,3 @@ $(document).ready(function() {
 
 	});
 });
-		
-			
-
-
-	
