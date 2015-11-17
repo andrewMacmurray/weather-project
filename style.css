@@ -19,8 +19,6 @@ body {
     user-select: none;
 }
 
-
-
 h1 {
 	margin-left: 20px;
 	letter-spacing: 2px;
@@ -69,10 +67,6 @@ h1 {
 	display: none;
 	padding: 10px;
 	cursor: pointer;
-}
-
-#next-1 {
-
 }
 
 #next-2 {
@@ -205,8 +199,6 @@ h1 {
   100% {-webkit-transform: translateY(0);}
 }
 
-
-
 @keyframes shard-hover-2 {
   0% {transform: translateY(0);}
   50% {transform: translateY(5px);}
@@ -218,7 +210,6 @@ h1 {
   50% {-webkit-transform: translateY(5px);}
   100% {-webkit-transform: translateY(0);}
 }
-
 
 .shard-1,
 .shard-2,
@@ -244,9 +235,7 @@ h1 {
 }
 
 
-
 /*----boxes------*/
-
 
 #outer {
 	width: 80%;
