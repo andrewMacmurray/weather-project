@@ -82,7 +82,14 @@ $(document).ready(function() {
 		$('#container').css('height', height-300);
 		$('#weather-shard-3').css('top', height*set.shardOrigin);
 	});
-		
+
+
+	var raindrops = $('.raindrop');
+	console.log(raindrops);
+	for (var i=0; i<raindrops.length; i++) {
+		TweenMax.set(raindrops[i], {y: -(Math.random()*1500) +900});
+	}	
+	var shower = TweenMax.to($('.raindrop'), 0.5, {y: '+=800', repeat: -1, ease: Power0.easeNone});
 
 	// adds spheres invisibly 
 	for (var i=0; i<set.sphereNumber; i++) {
@@ -91,7 +98,7 @@ $(document).ready(function() {
 		var y = set.spawnMargin + Math.random()*height/2;
 		var size = (Math.random()*30) + 15;
 		TweenMax.set($('.energy-container:last-child'), {top: y, left: x});
-		TweenMax.set($('.energy-container:last-child .energy-sphere'), {width: size, height: size,borderRadius: size/2});
+		TweenMax.set($('.energy-container:last-child .energy-sphere'), {width: size, height: size, borderRadius: size/2});
 	}
 
 
@@ -132,6 +139,8 @@ $(document).ready(function() {
 
 	// story sequence
 	$('#begin').one('click', function() {
+		TweenMax.to(raindrops, 1, {opacity: 0});
+
 		var story = new TimelineLite();
 		story.to($(this), 1, {opacity: 0, display: 'none'}, 'start')
 		     .to($('.welcome'), 2, {opacity: 0, display: 'none'}, 'start')

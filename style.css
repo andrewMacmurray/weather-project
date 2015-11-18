@@ -91,6 +91,14 @@ h1 {
 
 /*---shards and spheres------*/
 
+.raindrop {
+	width: 3px;
+	height: 17px;
+	background-color: #3D80D9;
+	display: inline-block;
+	margin: 10px;
+}
+
 .energy-container {
 	color: transparent;
 	padding:0px;
