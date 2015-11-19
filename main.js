@@ -103,20 +103,17 @@ $(document).ready(function() {
 
 	
 	// welcome sequence
-	
 	// hide initial weather shard
 	$('#weather-shard-1').one('click', function() {
 		TweenMax.to($(this), 0.2, {opacity: 0, display: 'none'});
-		TweenMax.to(raindrops, 1, {opacity: 1, delay: 3.5, ease: Power0.easeNone});
-		TweenMax.to($('html'), 3, {backgroundColor: '#A3CDF5', delay: 2.5})
+		TweenMax.to(raindrops, 1, {opacity: 1, delay: 4.5, ease: Power0.easeNone});
+		TweenMax.to($('html'), 3, {backgroundColor: '#A3CDF5', delay: 4})
 		// welcome animation 
 		var welcome = new TimelineLite({delay: 1.5});
-		welcome.to($('#scene'), 4, {opacity: 1, ease: Power0.easeIn, delay: 0}, 'start') 
-		       .to($('.welcome'), 3, {opacity: 1}, 'start+=3')
-		       .to($('#begin'), 1, {opacity: 1, display: 'inline-block'}, 'start+=5');
+		welcome.to($('#scene'), 4, {opacity: 1, ease: Power0.easeIn}, 'start') 
+		       .to($('.welcome'), 3, {opacity: 1}, 'start+=6')
+		       .to($('#begin'), 1, {opacity: 1, display: 'inline-block'}, 'start+=8');
 	});
-
-
 	
 	// story sequence
 	(function story() {
