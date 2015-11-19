@@ -84,13 +84,6 @@ $(document).ready(function() {
 	});
 
 
-	var raindrops = $('.raindrop');
-	console.log(raindrops);
-	for (var i=0; i<raindrops.length; i++) {
-		TweenMax.set(raindrops[i], {y: -(Math.random()*1500) +900});
-	}	
-	var shower = TweenMax.to($('.raindrop'), 0.5, {y: '+=800', repeat: -1, ease: Power0.easeNone});
-
 	// adds spheres invisibly 
 	for (var i=0; i<set.sphereNumber; i++) {
 		$('#container').append(set.energySphere);
@@ -101,17 +94,28 @@ $(document).ready(function() {
 		TweenMax.set($('.energy-container:last-child .energy-sphere'), {width: size, height: size, borderRadius: size/2});
 	}
 
+	// rain effect
+	var raindrops = $('.raindrop');
+	for (var i=0; i<raindrops.length; i++) {
+		TweenMax.set(raindrops[i], {y: -(Math.random()*1500) + 900, opacity: 0});
+	}	
+	var shower = TweenMax.to(raindrops, 0.5, {y: '+=1000', repeat: -1, ease: Power0.easeNone});
 
+	
 	// welcome sequence
+	
 	// hide initial weather shard
 	$('#weather-shard-1').one('click', function() {
 		TweenMax.to($(this), 0.2, {opacity: 0, display: 'none'});
+		TweenMax.to(raindrops, 1, {opacity: 1, delay: 3.5, ease: Power0.easeNone});
+		TweenMax.to($('html'), 2, {backgroundColor: '#A3CDF5'})
 		// welcome animation 
 		var welcome = new TimelineLite({delay: 1.5});
 		welcome.to($('#scene'), 4, {opacity: 1, ease: Power0.easeIn, delay: 0}, 'start') 
 		       .to($('.welcome'), 3, {opacity: 1}, 'start+=3')
 		       .to($('#begin'), 1, {opacity: 1, display: 'inline-block'}, 'start+=5');
 	});
+
 
 	
 	// one way slider function
@@ -140,7 +144,6 @@ $(document).ready(function() {
 	// story sequence
 	$('#begin').one('click', function() {
 		TweenMax.to(raindrops, 1, {opacity: 0});
-
 		var story = new TimelineLite();
 		story.to($(this), 1, {opacity: 0, display: 'none'}, 'start')
 		     .to($('.welcome'), 2, {opacity: 0, display: 'none'}, 'start')
@@ -148,6 +151,8 @@ $(document).ready(function() {
 		     .to($('#story #section-1'), 2, {opacity: 1, display: 'block', ease: Power0.easeIn}, 'one')
 		     .to($('#next-1.next'), 2, {opacity: 1, display: 'block'}, 'one+=2');
 	});
+
+	
 	slider('#story', '#next-1.next', 5, toInstructions);
 	function toInstructions() {
 		slideTime = 0.8;
@@ -254,8 +259,6 @@ $(document).ready(function() {
 												ease: Power1.easeInOut}, 0.1);
 		TweenMax.to($('#weather-shard-3'), 1, {opacity: 1, display: 'block', delay: 2});
 	});
-
-
 
 	
 	// collect energy and power up shard 
