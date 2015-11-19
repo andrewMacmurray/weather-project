@@ -1,5 +1,7 @@
 # weather-project
-A short interactive fable using greensock animation library + jQuery
+**A short interactive fable about a village that's lost its weather**
+
+Uses greensock animation library, jQuery and gets weather data from google open weather maps.
 
 A work in progress and suggestions are welcome
 
