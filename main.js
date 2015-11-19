@@ -118,62 +118,56 @@ $(document).ready(function() {
 
 
 	
-	// one way slider function
-	function slider(id, button, totalSlides, endSequence) {
+	// story sequence
+	(function story() {
+		$('#begin').one('click', function() {
+			var story = new TimelineLite();
+			story.to($(this), 1, {opacity: 0, display: 'none'}, 'start')
+			     .to($('.welcome'), 2, {opacity: 0, display: 'none'}, 'start')
+			     .to($('#story'), 0.1, {display: 'block'})
+			     .to($('#story #section-1'), 2, {opacity: 1, display: 'block', ease: Power0.easeIn}, 'one')
+			     .to($('#next-1.next'), 2, {opacity: 1, display: 'block'}, 'one+=2');
+		});
 		var section = 2;
-		var slideTime = 0.8;
-		$(button).on('click', function() {
-			// defines sequence after last slide
+		var slideSpeed = 0.8;
+		var totalSlides = 5;
+		var id = '#story';
+		$('#next-1').on('click', function() {
 			if (section === totalSlides+1) {
-				if (endSequence === undefined) {
-					TweenMax.to($(button), slideTime/2, {opacity: 0, display: 'none', delay: slideTime/1.5});
-				} else {
-					endSequence();
-				}
+				var instructions = new TimelineLite({delay: slideSpeed/2});
+				instructions.to($('#next-1, #story'), slideSpeed/2, {opacity: 0, display: 'none'})
+							.to($('#instructions'), 0.1, {display: 'block'})
+							.to($('#weather-shard-2'), 1, {opacity: 1, display: 'block'})
+							.to($('#instructions #section-1'), 1, {opacity: 1, display: 'block'})
+							.to($('#next-2'), 1, {opacity: 1, display: 'block'});
 			}
-			// hides previous, shows next
 			var previous = $(id + ' #section-' + (section-1));
 			var next = $(id + ' #section-' + section);
-			TweenMax.to(previous, slideTime, {opacity: 0, display: 'none'});
-			TweenMax.to(next, slideTime, {opacity: 1, display: 'block', delay: slideTime});
-			section ++;
+			TweenMax.to(previous, slideSpeed, {opacity: 0, display: 'none'});
+			TweenMax.to(next, slideSpeed, {opacity: 1, display: 'block', delay: slideSpeed});
+			section ++;		
 		});
-	}
+	}());
 
+	(function instructions() {
+		var section = 2;
+		var slideSpeed = 0.8;
+		var totalSlides = 3;
+		var id = '#instructions';
+		$('#next-2').on('click', function() {
+			if (section === totalSlides+1) {
+				var city = new TimelineLite({delay: slideSpeed/2});
+				city.to($('#next-2, #instructions'), 1, {opacity: 0, display: 'none'})
+					.to($('#choose-city'), 1, {opacity: 1, display: 'block'})
+			}
+			var previous = $(id + ' #section-' + (section-1));
+			var next = $(id + ' #section-' + section);
+			TweenMax.to(previous, slideSpeed, {opacity: 0, display: 'none'});
+			TweenMax.to(next, slideSpeed, {opacity: 1, display: 'block', delay: slideSpeed});
+			section ++;		
+		});	
+	}());
 
-	// story sequence
-	$('#begin').one('click', function() {
-		TweenMax.to(raindrops, 1, {opacity: 0});
-		var story = new TimelineLite();
-		story.to($(this), 1, {opacity: 0, display: 'none'}, 'start')
-		     .to($('.welcome'), 2, {opacity: 0, display: 'none'}, 'start')
-		     .to($('#story'), 0.1, {display: 'block'})
-		     .to($('#story #section-1'), 2, {opacity: 1, display: 'block', ease: Power0.easeIn}, 'one')
-		     .to($('#next-1.next'), 2, {opacity: 1, display: 'block'}, 'one+=2');
-	});
-
-	
-	slider('#story', '#next-1.next', 5, toInstructions);
-	function toInstructions() {
-		slideTime = 0.8;
-		var instructions = new TimelineLite({delay: slideTime/2});
-
-		instructions.to($('#next-1.next, #story'), slideTime/2, {opacity: 0, display: 'none'})
-					.to($('#instructions'), 0.1, {display: 'block'})
-					.to($('#weather-shard-2'), 1, {opacity: 1, display: 'block'})
-					.to($('#instructions #section-1'), 1, {opacity: 1, display: 'block'})
-					.to($('#next-2.next'), 1, {opacity: 1, display: 'block'});
-	}
-
-	// instructions sequence
-	slider('#instructions', '#next-2.next', 3, toCity);
-	function toCity() {
-		slideTime = 0.8;
-		var city = new TimelineLite({delay: slideTime/2});
-
-		city.to($('#next-2.next, #instructions'), 1, {opacity: 0, display: 'none'})
-			.to($('#choose-city'), 1, {opacity: 1, display: 'block'})
-	}
 
 	// get weather data
 	$('#find-weather').on('click', function() {
