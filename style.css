@@ -96,7 +96,15 @@ h1 {
 	height: 17px;
 	background-color: #3D80D9;
 	display: inline-block;
-	margin: 10px;
+	margin: 20px;
+}
+
+#rain-container {
+	display: block;
+	margin: auto;
+	position: absolute;
+	text-align: center;
+	width: 100%;
 }
 
 .energy-container {
