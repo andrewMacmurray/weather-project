@@ -140,6 +140,9 @@ $(document).ready(function() {
 							.to($('#weather-shard-2'), 1, {opacity: 1, display: 'block'})
 							.to($('#instructions #section-1'), 1, {opacity: 1, display: 'block'})
 							.to($('#next-2'), 1, {opacity: 1, display: 'block'});
+			} else if (section === 3) {
+				TweenMax.to($('html'), 2.5, {backgroundColor: '#fff', delay: 1.5});
+				TweenMax.to(raindrops, 2.5, {opacity: 0, display: 'none', delay: 1.5});
 			}
 			var previous = $(id + ' #section-' + (section-1));
 			var next = $(id + ' #section-' + section);
