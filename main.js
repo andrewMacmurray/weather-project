@@ -147,6 +147,7 @@ $(document).ready(function() {
 			TweenMax.to(next, slideSpeed, {opacity: 1, display: 'block', delay: slideSpeed});
 			section ++;		
 		});
+
 	}());
 
 	(function instructions() {
