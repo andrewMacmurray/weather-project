@@ -117,7 +117,6 @@ $(document).ready(function() {
 			     .to($('#story #section-1'), 2, {opacity: 1, display: 'block', ease: Power0.easeIn}, 'one')
 			     .to($('#next-1.next'), 2, {opacity: 1, display: 'block'}, 'one+=2');
 		});
-		
 		var section = 2;
 		var slideSpeed = 0.8;
 		var totalSlides = 5;
