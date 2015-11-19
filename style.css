@@ -30,17 +30,7 @@ h1 {
 	text-transform: uppercase;
 	font-size: 22px;
 	letter-spacing: 5px;
-	margin-top: -20px;
 	opacity: 0;	
-}
-
-.collect {
-	font-size: 15px;
-	margin-top: 60px;
-	opacity: 0;
-	display: none;
-	letter-spacing: 1px;
-	color: #ababab;
 }
 
 #counter {
@@ -275,7 +265,6 @@ h1 {
 
 #story {
 	height: 90px;
-	margin-top: -45px;
 	display: none;
 }
 
