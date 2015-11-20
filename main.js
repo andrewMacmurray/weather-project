@@ -107,7 +107,7 @@ $(document).ready(function() {
 	$('#weather-shard-1').one('click', function() {
 		TweenMax.to($(this), 0.2, {opacity: 0, display: 'none'});
 		TweenMax.to(raindrops, 1, {opacity: 1, delay: 4.5, ease: Power0.easeNone});
-		TweenMax.to($('html'), 3, {backgroundColor: '#A3CDF5', delay: 4})
+		TweenMax.to($('html'), 8, {backgroundColor: '#A3CDF5', delay: 4})
 		// welcome animation 
 		var welcome = new TimelineLite({delay: 1.5});
 		welcome.to($('#scene'), 4, {opacity: 1, ease: Power0.easeIn}, 'start') 
