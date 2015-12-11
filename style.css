@@ -97,6 +97,20 @@ h1 {
 	width: 100%;
 }
 
+#big-sun {
+	margin: -230px auto 0;
+	width: 500px;
+	height: 500px;
+	border-radius: 500px;
+	background-color: #ffca64;
+
+}
+
+#sun-container {
+	position: absolute;
+	width: 100%;
+}
+
 .energy-container {
 	color: transparent;
 	padding:0px;
