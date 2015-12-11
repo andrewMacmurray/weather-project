@@ -20,22 +20,24 @@ $(document).ready(function() {
 				shard2:'#FF9600',
 				shard3:'#FF7E7E',
 				shard4:'#FFDF16',
-				bg:'#FFDF4E',
-				bg2:'#FFC24E'
+				bg:'#FFF186',
+				weatherDiv: '#big-sun'
 			},
 			rain: {
 				shard1:'#8CF6FF',
 				shard2:'#D2DCF9',
 				shard3:'#90D6D6',
 				shard4:'#54A5EC',
-				bg:'#6AA8FF'
+				bg:'#6AA8FF',
+				weatherDiv: '.raindrop'
 			},
 			clouds: {
 				shard1:'#CCDAFF',
 				shard2:'#3DACD4',
 				shard3:'#3B729E',
 				shard4:'#88A9E2',
-				bg:'#9AA4B3'
+				bg:'#9AA4B3',
+				weatherDiv: '.clouds'
 			}
 		},
 
@@ -273,7 +275,7 @@ $(document).ready(function() {
 			if (set.sphereCounter > 8) {
 				set.sphereCounter = 1;
 				TweenMax.killAll();
-
+				// backhround
 				TweenMax.fromTo($('html'), 5,
 					{backgroundColor: '#fff'},
 					{backgroundColor: shardColors[weather].bg,
@@ -281,6 +283,14 @@ $(document).ready(function() {
 					 repeat: 1,
 					 delay: 0.5,
 					 ease: Power4.easeOut});
+				// raindrops, big sun, cloud forms etc
+				TweenMax.fromTo($(shardColors[weather].weatherDiv), 5,
+					{opacity: 0},
+					{opacity: 1,
+					yoyo: true,
+					repeat: 1,
+					delay: 0.5,
+					ease: Power4.easeOut});
 
 				// reduce animations for smaller screen sizes
 				if (window.innerWidth > 980) {
@@ -325,7 +335,6 @@ $(document).ready(function() {
 			}
 			else if (set.sphereCounter > 7) {
 				for (var i=0; i<4; i++) {
-
 					TweenMax.fromTo($('#weather-shard-3 #shard-' + (i+1)), 0.2,
 						{fill: shardColors[weather]['shard' + (i+1)]},
 						{fill: shardColors[weather]['shard' + (4-i)],
@@ -336,7 +345,6 @@ $(document).ready(function() {
 			}
 			else if (set.sphereCounter > 6) {
 				for (var i=0; i<4; i++) {
-
 					TweenMax.fromTo($('#weather-shard-3 #shard-' + (i+1)), 0.3,
 						{fill: shardColors[weather]['shard' + (i+1)]},
 						{fill: shardColors[weather]['shard' + (4-i)],
@@ -347,7 +355,6 @@ $(document).ready(function() {
 			}
 			else if (set.sphereCounter > 5) {
 				for (var i=0; i<4; i++) {
-
 					TweenMax.fromTo($('#weather-shard-3 #shard-' + (i+1)), 0.5,
 						{fill: shardColors[weather]['shard' + (i+1)]},
 						{fill: shardColors[weather]['shard' + (4-i)],
