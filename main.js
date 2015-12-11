@@ -1,9 +1,9 @@
 $(document).ready(function() {
-	
+
 	// set vertical height
 	var height = $(window).height();
 	var width = $(window).width();
-	
+
 	// settings
 	var set = {
 		weatherClass: 'none',
@@ -12,7 +12,7 @@ $(document).ready(function() {
 		sphereCounter: 1,
 		spawnMargin: 100,
 		shardOrigin: 0.15,
-		
+
 		// colours
 		shardColors: {
 			sunshine: {
@@ -38,7 +38,7 @@ $(document).ready(function() {
 				bg:'#9AA4B3'
 			}
 		},
-		
+
 		// messages
 		result: {
 			sunshine: 'Skies are clear and the sun is shining in ',
@@ -59,16 +59,16 @@ $(document).ready(function() {
 		// changes result message second time round
 		secondLoop: {
 			message1: 'Again?!!',
-			message2: 'Oh well, you could give them one more chance if you\'re feeling benevolent...'  
+			message2: 'Oh well, you could give them one more chance if you\'re feeling benevolent...'
 		}
 	}
-	
+
 	if (width < 981) {
 		set.sphereNumber = 10;
 		set.spawnMargin = 100;
 	}
 
-	
+
 	// responsive design features -- scales heights and margins
 	$(window).on('load resize', function() {
 		var height = $(window).height();
@@ -84,7 +84,7 @@ $(document).ready(function() {
 	});
 
 
-	// adds spheres invisibly 
+	// adds spheres invisibly
 	for (var i=0; i<set.sphereNumber; i++) {
 		$('#container').append(set.energySphere);
 		var x = set.spawnMargin + Math.random()*width/1.5;
@@ -98,23 +98,23 @@ $(document).ready(function() {
 	var raindrops = $('.raindrop');
 	for (var i=0; i<raindrops.length; i++) {
 		TweenMax.set(raindrops[i], {y: -(Math.random()*1500) + 900, opacity: 0});
-	}	
+	}
 	var shower = TweenMax.to(raindrops, 0.5, {y: '+=1000', repeat: -1, ease: Power0.easeNone});
 
-	
+
 	// welcome sequence
 	// hide initial weather shard
 	$('#weather-shard-1').one('click', function() {
 		TweenMax.to($(this), 0.2, {opacity: 0, display: 'none'});
 		TweenMax.to(raindrops, 1, {opacity: 1, delay: 4.5, ease: Power0.easeNone});
 		TweenMax.to($('html'), 3, {backgroundColor: '#A3CDF5', delay: 4})
-		// welcome animation 
+		// welcome animation
 		var welcome = new TimelineLite({delay: 1.5});
-		welcome.to($('#scene'), 4, {opacity: 1, ease: Power0.easeIn}, 'start') 
+		welcome.to($('#scene'), 4, {opacity: 1, ease: Power0.easeIn}, 'start')
 		       .to($('.welcome'), 3, {opacity: 1}, 'start+=6')
 		       .to($('#begin'), 1, {opacity: 1, display: 'inline-block'}, 'start+=8');
 	});
-	
+
 	// story sequence
 	(function story() {
 		$('#begin').one('click', function() {
@@ -145,7 +145,7 @@ $(document).ready(function() {
 			var next = $(id + ' #section-' + section);
 			TweenMax.to(previous, slideSpeed, {opacity: 0, display: 'none'});
 			TweenMax.to(next, slideSpeed, {opacity: 1, display: 'block', delay: slideSpeed});
-			section ++;		
+			section ++;
 		});
 
 	}());
@@ -165,8 +165,8 @@ $(document).ready(function() {
 			var next = $(id + ' #section-' + section);
 			TweenMax.to(previous, slideSpeed, {opacity: 0, display: 'none'});
 			TweenMax.to(next, slideSpeed, {opacity: 1, display: 'block', delay: slideSpeed});
-			section ++;		
-		});	
+			section ++;
+		});
 	}());
 
 
@@ -174,9 +174,9 @@ $(document).ready(function() {
 	$('#find-weather').on('click', function() {
 		$('#city-form').on('submit', function(e) {
 			e.preventDefault();
-			var city = $('#city').val(); 
+			var city = $('#city').val();
 			if (city) {
-			//AJAX call to google weather maps 
+			//AJAX call to google weather maps
 				$.ajax({
 					url: 'http://api.openweathermap.org/data/2.5/weather?',
 					type: 'GET',
@@ -184,10 +184,11 @@ $(document).ready(function() {
 					dataType: 'json',
 					success: function(json) {
 						var weather = json.weather[0].main;
+						console.log(json.weather[0]);
 						var rain = json.weather[0].description;
 						var windSpeed = json.wind.speed;
 						var city = json.name;
-						
+
 						set.weatherClass = $('#result').attr('class');
 						$('#result').removeClass(set.weatherClass);
 						// output messages depending on location
@@ -209,7 +210,7 @@ $(document).ready(function() {
 
 						TweenMax.to($('#result'), 1, {opacity:1, display:'block'});
 						TweenMax.to($('#connect'), 1, {opacity: 1, display:'block', delay:1});
-						
+
 					},
 					error: function() {
 						$('#result').text(set.result.errorMessage);
@@ -221,13 +222,13 @@ $(document).ready(function() {
 		});
 	});
 
-	
+
 	// set messages based on weather and add show energy spheres
 	$('#connect').on('click', function() {
 		// sets colour of energy spheres
 		set.weatherClass = $('#result').attr('class');
 		$('.energy-sphere').addClass(set.weatherClass);
-		
+
 		// sets messages based on the weather
 		if (set.weatherClass === 'rain') {
 			$('#success-message').text(set.success.message + set.success.rain);
@@ -238,14 +239,14 @@ $(document).ready(function() {
 		} else {
 			$('#success-message').text(set.success.message + set.success.wind);
 		}
-			
+
 		$('#complaining').text(set.success.complaining + set.weatherClass + set.success.gone);
 
 
 		// hide last seciton
 		TweenMax.to($('#choose-city, #result, #connect'), 1, {opacity: 0, display:'none'});
 		TweenMax.to($('#gather-energy'), 1, {opacity: 1, display:'block', delay: 1});
-		
+
 		// make energy spheres visible
 		TweenMax.staggerTo($('.energy-container'), 1, {opacity: 1, display: 'inline-block'}, 0.1);
 	    TweenMax.staggerTo($('.energy-container'), 2, {y: -20,
@@ -255,8 +256,8 @@ $(document).ready(function() {
 		TweenMax.to($('#weather-shard-3'), 1, {opacity: 1, display: 'block', delay: 2});
 	});
 
-	
-	// collect energy and power up shard 
+
+	// collect energy and power up shard
 	$('.energy-container').on('click', function() {
 		// snap spheres to origin point
 		var sphere = $(this);
@@ -265,14 +266,14 @@ $(document).ready(function() {
 
 		// defines animations for each power level of shard (1-8)
 		shardPower(set.weatherClass, set.shardColors, set.sphereCounter);
-		
+
 		function shardPower(weather, shardColors, sphereCounter) {
 			set.sphereCounter++;
 
 			if (set.sphereCounter > 8) {
 				set.sphereCounter = 1;
 				TweenMax.killAll();
-				
+
 				TweenMax.fromTo($('html'), 5,
 					{backgroundColor: '#fff'},
 					{backgroundColor: shardColors[weather].bg,
@@ -280,7 +281,7 @@ $(document).ready(function() {
 					 repeat: 1,
 					 delay: 0.5,
 					 ease: Power4.easeOut});
-				
+
 				// reduce animations for smaller screen sizes
 				if (window.innerWidth > 980) {
 					TweenMax.to($('.energy-container'), 1.5, {opacity: 0, y: -500, display:'none'});
@@ -289,7 +290,7 @@ $(document).ready(function() {
 					TweenMax.to($('.energy-container'), 1.5, {opacity: 0, display:'none'});
 					TweenMax.to($('#weather-shard-3'), 4, {opacity: 0, display:'none'});
 				}
-				
+
 				var success = new TimelineLite();
 
 				// end sequence
@@ -302,7 +303,7 @@ $(document).ready(function() {
 				       .to($('#maybe'), 1, {opacity: 1, display: 'block'})
 				       .to($('#maybe'), 1, {opacity: 0, display: 'none', delay: 2, onComplete: resetState})
 				       .to($('#choose-city'), 1, {opacity: 1, display: 'block'});
-				
+
 				// resets colours and positions of weather elements
 				function resetState() {
 					var container = $('.energy-container');
@@ -313,7 +314,7 @@ $(document).ready(function() {
 						TweenMax.set($(this), {top: y, left: x});
 					});
 					$('.energy-sphere, #result').removeClass(weather);
-					
+
 					for (var i=0; i<4; i++) {
 						TweenMax.set($('#weather-shard-3 #shard-' + (i+1)), {clearProps: 'fill'});
 					}
@@ -324,9 +325,9 @@ $(document).ready(function() {
 			}
 			else if (set.sphereCounter > 7) {
 				for (var i=0; i<4; i++) {
-					
+
 					TweenMax.fromTo($('#weather-shard-3 #shard-' + (i+1)), 0.2,
-						{fill: shardColors[weather]['shard' + (i+1)]}, 
+						{fill: shardColors[weather]['shard' + (i+1)]},
 						{fill: shardColors[weather]['shard' + (4-i)],
 						 repeat: -1,
 						 yoyo: true,
@@ -335,9 +336,9 @@ $(document).ready(function() {
 			}
 			else if (set.sphereCounter > 6) {
 				for (var i=0; i<4; i++) {
-					
+
 					TweenMax.fromTo($('#weather-shard-3 #shard-' + (i+1)), 0.3,
-						{fill: shardColors[weather]['shard' + (i+1)]}, 
+						{fill: shardColors[weather]['shard' + (i+1)]},
 						{fill: shardColors[weather]['shard' + (4-i)],
 						 repeat: -1,
 						 yoyo: true,
@@ -346,9 +347,9 @@ $(document).ready(function() {
 			}
 			else if (set.sphereCounter > 5) {
 				for (var i=0; i<4; i++) {
-					
+
 					TweenMax.fromTo($('#weather-shard-3 #shard-' + (i+1)), 0.5,
-						{fill: shardColors[weather]['shard' + (i+1)]}, 
+						{fill: shardColors[weather]['shard' + (i+1)]},
 						{fill: shardColors[weather]['shard' + (4-i)],
 						 repeat: -1,
 						 yoyo: true,
@@ -371,7 +372,7 @@ $(document).ready(function() {
 				// console.log(shardColors[weather].shard4, set.sphereCounter);
 				TweenMax.to($('#weather-shard-3 #shard-4'), 2, {fill: shardColors[weather].shard4});
 			}
-		}						
+		}
 
 	});
 });
