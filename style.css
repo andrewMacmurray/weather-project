@@ -6,7 +6,7 @@
 }
 
 html {
-	background-color: #fff; 
+	background-color: #fff;
 }
 
 body {
@@ -30,7 +30,7 @@ h1 {
 	text-transform: uppercase;
 	font-size: 22px;
 	letter-spacing: 5px;
-	opacity: 0;	
+	opacity: 0;
 }
 
 #counter {
@@ -265,6 +265,7 @@ h1 {
 
 #story {
 	height: 90px;
+	margin-top: -45px;
 	display: none;
 }
 
@@ -301,7 +302,7 @@ h1 {
 #story #section-6,
 #story #section-7 {
 	display: none;
-	opacity: 0;	
+	opacity: 0;
 	position: absolute;
 	width: 100%;
 }
@@ -314,7 +315,7 @@ h1 {
 #instructions #section-6,
 #instructions #section-7 {
 	display: none;
-	opacity: 0;	
+	opacity: 0;
 	position: absolute;
 	width: 100%;
 }
@@ -363,4 +364,3 @@ input:focus {
 		margin-top: 60px;
 	}
 }
-
