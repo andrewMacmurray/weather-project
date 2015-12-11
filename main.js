@@ -107,7 +107,7 @@ $(document).ready(function() {
 	$('#weather-shard-1').one('click', function() {
 		TweenMax.to($(this), 0.2, {opacity: 0, display: 'none'});
 		TweenMax.to(raindrops, 1, {opacity: 1, delay: 4.5, ease: Power0.easeNone});
-		TweenMax.to($('html'), 3, {backgroundColor: '#A3CDF5', delay: 4})
+		// TweenMax.to($('html'), 3, {backgroundColor: '#A3CDF5', delay: 4})
 		// welcome animation
 		var welcome = new TimelineLite({delay: 1.5});
 		welcome.to($('#scene'), 4, {opacity: 1, ease: Power0.easeIn}, 'start')
@@ -138,7 +138,7 @@ $(document).ready(function() {
 							.to($('#instructions #section-1'), 1, {opacity: 1, display: 'block'})
 							.to($('#next-2'), 1, {opacity: 1, display: 'block'});
 			} else if (section === 3) {
-				TweenMax.to($('html'), 2.5, {backgroundColor: '#fff', delay: 1.5});
+				// TweenMax.to($('html'), 2.5, {backgroundColor: '#fff', delay: 1.5});
 				TweenMax.to(raindrops, 2.5, {opacity: 0, display: 'none', delay: 1.5});
 			}
 			var previous = $(id + ' #section-' + (section-1));
