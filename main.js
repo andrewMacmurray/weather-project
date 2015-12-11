@@ -99,14 +99,14 @@ $(document).ready(function() {
 	for (var i=0; i<raindrops.length; i++) {
 		TweenMax.set(raindrops[i], {y: -(Math.random()*1500) + 900, opacity: 0});
 	}
-	var shower = TweenMax.to(raindrops, 0.5, {y: '+=1000', repeat: -1, ease: Power0.easeNone});
+	// var shower = TweenMax.to(raindrops, 0.5, {y: '+=1000', repeat: -1, ease: Power0.easeNone});
 
 
 	// welcome sequence
 	// hide initial weather shard
 	$('#weather-shard-1').one('click', function() {
 		TweenMax.to($(this), 0.2, {opacity: 0, display: 'none'});
-		TweenMax.to(raindrops, 1, {opacity: 1, delay: 4.5, ease: Power0.easeNone});
+		// TweenMax.to(raindrops, 1, {opacity: 1, delay: 4.5, ease: Power0.easeNone});
 		// TweenMax.to($('html'), 3, {backgroundColor: '#A3CDF5', delay: 4})
 		// welcome animation
 		var welcome = new TimelineLite({delay: 1.5});
