@@ -11,5 +11,3 @@ See the working demo
 -----
 
 If you haven't heard of greensock (also known as GSAP) check it out [here](http://greensock.com/gsap/), it's great!
-
-some dummy text
