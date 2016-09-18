@@ -6,17 +6,17 @@
 }
 
 html {
-	background-color: #fff; 
+	background-color: #fff;
 }
 
 body {
 	margin: 0;
 	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 h1 {
@@ -31,7 +31,7 @@ h1 {
 	font-size: 22px;
 	letter-spacing: 5px;
 	margin-top: -20px;
-	opacity: 0;	
+	opacity: 0;
 }
 
 .collect {
@@ -150,7 +150,7 @@ h1 {
 #weather-shard-1 {
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 29%;
+	margin-top: -20vh;
 	display: block;
 	width: 130px;
 	height: 130px;
@@ -176,7 +176,7 @@ h1 {
 }
 
 #weather-shard-3 {
-	/*display: inline-block;*/
+	top: 10vh;
 	left: 45%;
 	width: 120px;
 	height: 120px;
@@ -245,16 +245,19 @@ h1 {
 
 #container {
 	width: 80%;
-	/*position: relative;*/
 	height: 100%;
 	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #content {
 	position: absolute;
 	text-align: center;
-	width: 100%;
 	z-index: 0;
+	height: 500px;
+	margin-top: -9vh;
 }
 
 #story {
@@ -296,7 +299,7 @@ h1 {
 #story #section-6,
 #story #section-7 {
 	display: none;
-	opacity: 0;	
+	opacity: 0;
 	position: absolute;
 	width: 100%;
 }
@@ -309,7 +312,7 @@ h1 {
 #instructions #section-6,
 #instructions #section-7 {
 	display: none;
-	opacity: 0;	
+	opacity: 0;
 	position: absolute;
 	width: 100%;
 }
@@ -358,4 +361,3 @@ input:focus {
 		margin-top: 60px;
 	}
 }
-

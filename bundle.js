@@ -13,20 +13,6 @@ $(document).ready(function () {
     set.spawnMargin = 100
   }
 
-  // responsive design features -- scales heights and margins
-  $(window).on('load resize', function () {
-    var height = $(window).height()
-    var width = $(window).width()
-    if (width > 980 && height > 650) {
-      $('#scene').css('margin-top', height / 4 - 90)
-    } else {
-      $('#scene').css('margin-top', height / 4 - 120)
-    }
-    $('#weather-shard-1').css('margin-top', height / 2 - 150)
-    $('#container').css('height', height - 300)
-    $('#weather-shard-3').css('top', height * set.shardOrigin)
-  })
-
   // adds spheres invisibly
   for (var i = 0; i < set.sphereNumber; i++) {
     $('#container').append(set.energySphere)
@@ -186,8 +172,8 @@ $(document).ready(function () {
   $('.energy-container').on('click', function () {
     // snap spheres to origin point
     var sphere = $(this)
-    TweenMax.set(sphere, {'top': height * set.shardOrigin, 'left': '48%'})
-    TweenMax.to(sphere, 0.2, {opacity: 0, display: 'none', delay: 0.2})
+    TweenMax.set(sphere, { 'top': '10vh', 'left': '48%', opacity: 1 })
+    TweenMax.to(sphere, 0.2, { opacity: 0, display: 'none', delay: 0.2 })
 
     // defines animations for each power level of shard (1-8)
     shardPower(set.weatherClass, set.shardColors, set.sphereCounter)
