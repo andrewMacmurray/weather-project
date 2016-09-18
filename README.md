@@ -5,9 +5,6 @@ Uses greensock animation library, jQuery and gets weather data from google open 
 
 A work in progress and suggestions are welcome
 
-See the working demo
-<a href='http://andrewmacmurray.github.io/weather-project/' target='_blank'>here</a>
-
------
+[Check out the demo here](http://andrewmacmurray.github.io/weather-project/)
 
 If you haven't heard of greensock (also known as GSAP) check it out [here](http://greensock.com/gsap/), it's great!
